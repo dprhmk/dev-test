@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  php:
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    networks:
+      - devtest-network
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: database
+    networks:
+      - devtest-network
+
+networks:
+  devtest-network:
+    driver: bridge
